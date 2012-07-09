@@ -13,7 +13,7 @@ import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
 @Entity
-public class Review extends Model {
+public class Review extends Model implements Noveltyable {
 	private static final long serialVersionUID = 4838970528612160732L;
 
 	@Id
@@ -121,5 +121,11 @@ public class Review extends Model {
 
 	public void setFirstComment(Comment firstComment) {
 		this.firstComment = firstComment;
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

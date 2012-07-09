@@ -13,7 +13,7 @@ import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
 @Entity
-public class Article extends Model {
+public class Article extends Model implements Noveltyable {
 	private static final long serialVersionUID = 8183237934262033420L;
 
 	@Id
@@ -58,6 +58,7 @@ public class Article extends Model {
 		lastUpdated = new Date();
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
