@@ -17,7 +17,7 @@ public class SiteInfo extends Controller {
 		String year = new SimpleDateFormat("yyyy").format(new Date());
 		String lastUpdated = new SimpleDateFormat("yyyy-MM-dd HH:mm Z z").format(new Date());
 		
-		return siteSummaryInfo.render(hostName,year,lastUpdated);
+		return SiteSummaryInfo.render(hostName,year,lastUpdated);
 	}
 	
 	public static Html noveltyInfo()
