@@ -1,9 +1,9 @@
 package models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
 
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
@@ -17,15 +17,15 @@ public class Album extends Model {
 	
 	@Required
 	@ManyToOne
-	@NotNull
+	@Column(nullable = false)
 	private Band band;
 	
 	@Required
-	@NotNull
+	@Column(nullable = false)
 	private String name;
 	
 	@Required
-	@NotNull
+	@Column(nullable = false)
 	private String styleName;
 
 	public Band getBand() {

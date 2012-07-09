@@ -1,9 +1,9 @@
 package models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.validation.constraints.NotNull;
 
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
@@ -16,20 +16,20 @@ public class File extends Model {
 	private Long id;
 	
 	@Required
-	@NotNull
+	@Column(nullable = false)
 	private String name;
 	
 	@Required
-	@NotNull
+	@Column(nullable = false)
 	private String extension;
 	
 	@Required
-	@NotNull
+	@Column(nullable = false)
 	private String mimeType;
 	
 	@Lob
 	@Required
-	@NotNull
+	@Column(nullable = false)
 	private byte[] content;
 
 	public String getName() {

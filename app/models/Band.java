@@ -3,7 +3,6 @@ package models;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
 
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
@@ -16,7 +15,7 @@ public class Band extends Model {
 	private Long id;
 	
 	@Required
-	@NotNull
+	@Column(nullable = false)
 	private String name;
 	
 	@Column

@@ -6,7 +6,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.NotNull;
 
 import play.data.validation.Constraints.Email;
 import play.data.validation.Constraints.Required;
@@ -21,11 +20,11 @@ public class User extends Model {
 	private Long id;
 	
 	@Required
-	@NotNull
+	@Column(nullable = false)
 	private String login;
 	
 	@Required
-	@NotNull
+	@Column(nullable = false)
 	private String passwordHash;
 	
 	@Column
@@ -50,7 +49,7 @@ public class User extends Model {
 	private File photo;
 	
 	@Required
-	@NotNull
+	@Column(nullable = false)
 	private Role role;
 
 	public String getLogin() {

@@ -1,11 +1,11 @@
 package models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.NotNull;
 
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
@@ -25,16 +25,16 @@ public class SplitLabel extends Model {
 	
 	@ManyToOne
 	@Required
-	@NotNull
+	@Column(nullable = false)
 	private Label label;
 	
 	@ManyToOne
 	@Required
-	@NotNull
+	@Column(nullable = false)
 	private Split split;
 	
 	@Required
-	@NotNull
+	@Column(nullable = false)
 	private Integer num;
 
 	public Label getLabel() {

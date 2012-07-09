@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
 
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
@@ -24,24 +23,24 @@ public class Comment extends Model {
 	private Comment parent;
 	
 	@Required
-	@NotNull
+	@Column(nullable = false)
 	private String login;
 	
 	@Required
-	@NotNull
+	@Column(nullable = false)
 	private Boolean member;
 	
 	@Lob
 	@Required
-	@NotNull
+	@Column(nullable = false)
 	private String text;
 	
 	@Required
-	@NotNull
+	@Column(nullable = false)
 	private Date postDate;
 	
 	@Required
-	@NotNull
+	@Column(nullable = false)
 	private User approvedBy;
 
 	public Comment getParent() {

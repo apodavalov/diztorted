@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
 
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
@@ -21,11 +20,11 @@ public class Split extends Model {
 	private String name;
 	
 	@Required
-	@NotNull
+	@Column(nullable = false)
 	private Integer year;
 	
 	@Required
-	@NotNull
+	@Column(nullable = false)
 	private Integer duration;
 	
 	@ManyToOne
@@ -33,11 +32,11 @@ public class Split extends Model {
 	
 	@Lob
 	@Required
-	@NotNull	
+	@Column(nullable = false)	
 	private String trackList;
 	
 	@Required
-	@NotNull	
+	@Column(nullable = false)	
 	private Boolean trackListNormal;
 
 	public String getName() {

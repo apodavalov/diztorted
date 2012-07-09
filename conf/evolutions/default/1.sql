@@ -6,42 +6,42 @@
 create table album (
   id                        bigint not null,
   band_id                   bigint,
-  name                      varchar(255),
-  style_name                varchar(255),
+  name                      varchar(255) not null,
+  style_name                varchar(255) not null,
   constraint pk_album primary key (id))
 ;
 
 create table announce (
   id                        bigint not null,
-  name                      varchar(255),
+  name                      varchar(255) not null,
   text_brief                clob,
-  text_full                 clob,
-  post_date                 timestamp,
-  action_date               timestamp,
+  text_full                 clob not null,
+  post_date                 timestamp not null,
+  action_date               timestamp not null,
   action_end_date           timestamp,
   user_id                   bigint,
-  published                 boolean,
-  last_updated              timestamp,
+  published                 boolean not null,
+  last_updated              timestamp not null,
   first_comment_id          bigint,
   constraint pk_announce primary key (id))
 ;
 
 create table article (
   id                        bigint not null,
-  name                      varchar(255),
-  text                      clob,
-  post_date                 timestamp,
+  name                      varchar(255) not null,
+  text                      clob not null,
+  post_date                 timestamp not null,
   user_id                   bigint,
-  author                    varchar(255),
-  published                 boolean,
-  last_updated              timestamp,
+  author                    varchar(255) not null,
+  published                 boolean not null,
+  last_updated              timestamp not null,
   first_comment_id          bigint,
   constraint pk_article primary key (id))
 ;
 
 create table band (
   id                        bigint not null,
-  name                      varchar(255),
+  name                      varchar(255) not null,
   origin                    varchar(255),
   constraint pk_band primary key (id))
 ;
@@ -55,17 +55,17 @@ create table banner (
 create table comment (
   id                        bigint not null,
   parent_id                 bigint,
-  login                     varchar(255),
-  member                    boolean,
-  text                      clob,
-  post_date                 timestamp,
+  login                     varchar(255) not null,
+  member                    boolean not null,
+  text                      clob not null,
+  post_date                 timestamp not null,
   constraint pk_comment primary key (id))
 ;
 
 create table contact (
   id                        bigint not null,
-  name                      varchar(255),
-  phone                     varchar(255),
+  name                      varchar(255) not null,
+  phone                     varchar(255) not null,
   mobile_phone              varchar(255),
   email                     varchar(255),
   icq                       integer,
@@ -73,60 +73,60 @@ create table contact (
   address                   varchar(255),
   site_url                  varchar(255),
   group_id                  bigint,
-  hidden                    boolean,
+  hidden                    boolean not null,
   description               varchar(255),
   constraint pk_contact primary key (id))
 ;
 
 create table contact_group (
   id                        bigint not null,
-  name                      varchar(255),
+  name                      varchar(255) not null,
   constraint pk_contact_group primary key (id))
 ;
 
 create table file (
   id                        bigint not null,
-  name                      varchar(255),
-  extension                 varchar(255),
-  mime_type                 varchar(255),
-  content                   blob,
+  name                      varchar(255) not null,
+  extension                 varchar(255) not null,
+  mime_type                 varchar(255) not null,
+  content                   blob not null,
   constraint pk_file primary key (id))
 ;
 
 create table interview (
   id                        bigint not null,
-  name                      varchar(255),
-  text                      clob,
-  post_date                 timestamp,
+  name                      varchar(255) not null,
+  text                      clob not null,
+  post_date                 timestamp not null,
   user_id                   bigint,
-  author                    varchar(255),
-  published                 boolean,
-  last_updated              timestamp,
+  author                    varchar(255) not null,
+  published                 boolean not null,
+  last_updated              timestamp not null,
   first_comment_id          bigint,
   constraint pk_interview primary key (id))
 ;
 
 create table label (
   id                        bigint not null,
-  name                      varchar(255),
+  name                      varchar(255) not null,
   constraint pk_label primary key (id))
 ;
 
 create table magazine (
   id                        bigint not null,
-  name                      varchar(255),
+  name                      varchar(255) not null,
   constraint pk_magazine primary key (id))
 ;
 
 create table news (
   id                        bigint not null,
-  name                      varchar(255),
-  text_brief                clob,
-  text_full                 clob,
-  post_date                 timestamp,
+  name                      varchar(255) not null,
+  text_brief                clob not null,
+  text_full                 clob not null,
+  post_date                 timestamp not null,
   user_id                   bigint,
-  published                 boolean,
-  last_updated              timestamp,
+  published                 boolean not null,
+  last_updated              timestamp not null,
   first_comment_id          bigint,
   constraint pk_news primary key (id))
 ;
@@ -134,12 +134,12 @@ create table news (
 create table review (
   id                        bigint not null,
   split_id                  bigint,
-  text                      clob,
-  post_date                 timestamp,
+  text                      clob not null,
+  post_date                 timestamp not null,
   user_id                   bigint,
-  author                    varchar(255),
-  published                 boolean,
-  last_updated              timestamp,
+  author                    varchar(255) not null,
+  published                 boolean not null,
+  last_updated              timestamp not null,
   first_comment_id          bigint,
   constraint pk_review primary key (id))
 ;
@@ -147,11 +147,11 @@ create table review (
 create table split (
   id                        bigint not null,
   name                      varchar(255),
-  year                      integer,
-  duration                  integer,
+  year                      integer not null,
+  duration                  integer not null,
   cover_id                  bigint,
-  track_list                clob,
-  track_list_normal         boolean,
+  track_list                clob not null,
+  track_list_normal         boolean not null,
   constraint pk_split primary key (id))
 ;
 
@@ -159,7 +159,7 @@ create table split_album (
   id                        bigint not null,
   album_id                  bigint,
   split_id                  bigint,
-  num                       integer,
+  num                       integer not null,
   constraint uq_split_album_1 unique (album_id,split_id),
   constraint uq_split_album_2 unique (split_id,num),
   constraint pk_split_album primary key (id))
@@ -169,7 +169,7 @@ create table split_label (
   id                        bigint not null,
   label_id                  bigint,
   split_id                  bigint,
-  num                       integer,
+  num                       integer not null,
   constraint uq_split_label_1 unique (label_id,split_id),
   constraint uq_split_label_2 unique (split_id,num),
   constraint pk_split_label primary key (id))
@@ -177,8 +177,8 @@ create table split_label (
 
 create table user (
   id                        bigint not null,
-  login                     varchar(255),
-  password_hash             varchar(255),
+  login                     varchar(255) not null,
+  password_hash             varchar(255) not null,
   first_name                varchar(255),
   second_name               varchar(255),
   last_name                 varchar(255),
@@ -186,7 +186,7 @@ create table user (
   jabber                    varchar(255),
   email                     varchar(255),
   photo_id                  bigint,
-  role                      integer,
+  role                      integer not null,
   constraint ck_user_role check (role in (0,1,2)),
   constraint uq_user_1 unique (login),
   constraint pk_user primary key (id))

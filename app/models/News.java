@@ -2,12 +2,12 @@ package models;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.PreUpdate;
-import javax.validation.constraints.NotNull;
 
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
@@ -20,33 +20,33 @@ public class News extends Model {
 	private Long id;
 	
 	@Required
-	@NotNull
+	@Column(nullable = false)
 	private String name;
 	
 	@Lob
-	@NotNull
+	@Column(nullable = false)
 	private String textBrief;
 	
 	@Lob
 	@Required
-	@NotNull
+	@Column(nullable = false)
 	private String textFull;
 	
 	@Required
-	@NotNull
+	@Column(nullable = false)
 	private Date postDate;
 	
 	@Required
 	@ManyToOne
-	@NotNull
+	@Column(nullable = false)
 	private User user;
 	
 	@Required
-	@NotNull
+	@Column(nullable = false)
 	private Boolean published;
 	
 	@Required
-	@NotNull
+	@Column(nullable = false)
 	private Date lastUpdated;
 	
 	@ManyToOne

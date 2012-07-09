@@ -4,7 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
 
 import play.data.validation.Constraints.Email;
 import play.data.validation.Constraints.Required;
@@ -18,11 +17,11 @@ public class Contact extends Model {
 	private Long id;
 	
 	@Required
-	@NotNull
+	@Column(nullable = false)
 	private String name;
 	
 	@Required
-	@NotNull
+	@Column(nullable = false)
 	private String phone;
 	
 	@Column
@@ -45,11 +44,11 @@ public class Contact extends Model {
 	
 	@Required
 	@ManyToOne
-	@NotNull
+	@Column(nullable = false)
 	private ContactGroup group;
 	
 	@Required
-	@NotNull
+	@Column(nullable = false)
 	private Boolean hidden;
 	
 	@Column

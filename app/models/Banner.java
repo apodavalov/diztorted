@@ -3,7 +3,6 @@ package models;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
 
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
@@ -19,7 +18,7 @@ public class Banner extends Model {
 	private String text;
 	
 	@Required
-	@NotNull
+	@Column(nullable = false)
 	private Contact contact;
 
 	public String getText() {
