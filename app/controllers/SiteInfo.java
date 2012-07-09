@@ -1,8 +1,11 @@
 package controllers;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import models.Noveltiable;
 
 import play.*;
 import play.api.templates.Html;
@@ -23,7 +26,7 @@ public class SiteInfo extends Controller {
 	public static Html noveltyInfo()
 	{
 		// TODO: информация о новинках сайта
-		return Html.empty();
+		return NoveltyInfo.render(new ArrayList<Noveltiable>());
 	}
 	
 	public static Html lastReviews()

@@ -13,7 +13,7 @@ import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
 @Entity
-public class Review extends Model implements Noveltyable {
+public class Review extends Model implements Noveltiable {
 	private static final long serialVersionUID = 4838970528612160732L;
 
 	@Id
