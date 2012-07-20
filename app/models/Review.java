@@ -125,7 +125,9 @@ public class Review extends Model implements Noveltiable {
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		if (split == null)
+			return null;
+		
+		return split.getFullName();
 	}
 }

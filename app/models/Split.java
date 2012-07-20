@@ -1,5 +1,8 @@
 package models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -8,6 +11,8 @@ import javax.persistence.ManyToOne;
 
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
+
+import com.avaje.ebean.QueryIterator;
 
 @Entity
 public class Split extends Model {
@@ -89,5 +94,54 @@ public class Split extends Model {
 
 	public Long getId() {
 		return id;
+	}
+
+	public String getFullName() {
+		return String.format("%1$s [ %2$s ]", getBandString(), getNameString());
+	}
+	
+	public String getBandString() {
+		Album[] albums = findAlbums();
+		
+		if (albums.length == 0)
+			return "V/A";
+		
+		StringBuilder bands = new StringBuilder();
+		
+		for (int i = 0; i < albums.length; i++)
+		{
+			if (i != 0)
+				bands.append(" / ");
+			
+			bands.append(albums[i].getBand().getName());
+		}
+		
+		return bands.toString();
+	}
+
+	public String getOriginString() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public String getNameString() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public Album[] findAlbums() {
+		if (id == null)
+			return new Album[0];
+		
+		QueryIterator<SplitAlbum> iterator = SplitAlbum.getFinder().
+			where().eq("split_id", id).
+			orderBy("num asc").findIterate();
+		
+		List<Album> albums = new ArrayList<Album>();
+		
+		while (iterator.hasNext())
+			albums.add(iterator.next().getAlbum());
+		
+		return albums.<Album>toArray(new Album[albums.size()]);
 	}
 }
