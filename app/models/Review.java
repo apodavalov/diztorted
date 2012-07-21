@@ -130,4 +130,9 @@ public class Review extends Model implements Noveltiable {
 		
 		return split.getFullName();
 	}
+	
+	@Override
+	public String getEntityType() {
+		return "review";
+	}
 }

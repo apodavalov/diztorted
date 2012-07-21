@@ -1,6 +1,6 @@
 package models;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -8,11 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
-
-import com.avaje.ebean.QueryIterator;
 
 @Entity
 public class Split extends Model {
@@ -23,6 +23,12 @@ public class Split extends Model {
 	
 	@Column
 	private String name;
+	
+	@Column
+	private String origin;
+	
+	@Column
+	private String style;	
 	
 	@Required
 	@Column(nullable = false)
@@ -43,6 +49,22 @@ public class Split extends Model {
 	@Required
 	@Column(nullable = false)	
 	private Boolean trackListNormal;
+	
+	@OneToMany
+	@OrderBy("num asc")
+	private List<SplitAlbum> splitAlbums;
+	
+	@OneToMany
+	@OrderBy("num asc")
+	private List<SplitLabel> splitLabels;
+	
+	public List<SplitAlbum> getSplitAlbums() {
+		return Collections.unmodifiableList(splitAlbums);
+	}
+	
+	public List<SplitLabel> getSplitLabels() {
+		return splitLabels;
+	}
 
 	public String getName() {
 		return name;
@@ -50,6 +72,22 @@ public class Split extends Model {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public String getOrigin() {
+		return origin;
+	}
+
+	public void setOrigin(String origin) {
+		this.origin = origin;
+	}
+	
+	public String getStyle() {
+		return style;
+	}
+
+	public void setStyle(String style) {
+		this.style = style;
 	}
 
 	public Integer getYear() {
@@ -101,47 +139,100 @@ public class Split extends Model {
 	}
 	
 	public String getBandString() {
-		Album[] albums = findAlbums();
-		
-		if (albums.length == 0)
+		if (splitAlbums.size() == 0)
 			return "V/A";
 		
 		StringBuilder bands = new StringBuilder();
 		
-		for (int i = 0; i < albums.length; i++)
+		for (int i = 0; i < splitAlbums.size(); i++)
 		{
 			if (i != 0)
 				bands.append(" / ");
 			
-			bands.append(albums[i].getBand().getName());
+			bands.append(splitAlbums.get(i).getAlbum().getBand().getName());
 		}
 		
 		return bands.toString();
 	}
 
 	public String getOriginString() {
-		// TODO Auto-generated method stub
-		return null;
+		if (origin != null)
+			return origin;
+		
+		if (splitAlbums.size() == 0)
+			return null;
+		
+		StringBuilder bands = new StringBuilder();
+		
+		for (int i = 0; i < splitAlbums.size(); i++)
+		{
+			if (i != 0)
+				bands.append(" / ");
+			
+			String value = splitAlbums.get(i).getAlbum().getBand().getOrigin();
+			if (value == null)
+				value = "<Неизвестно>";
+			
+			bands.append(value);
+		}
+		
+		return bands.toString();
 	}
 	
 	public String getNameString() {
-		// TODO Auto-generated method stub
-		return null;
+		if (name != null)
+			return name;
+		
+		if (splitAlbums.size() == 0)
+			return "<Без названия>";
+		
+		StringBuilder bands = new StringBuilder();
+		
+		for (int i = 0; i < splitAlbums.size(); i++)
+		{
+			if (i != 0)
+				bands.append(" / ");
+			
+			bands.append(splitAlbums.get(i).getAlbum().getName());
+		}
+		
+		return bands.toString();
 	}
 	
-	public Album[] findAlbums() {
-		if (id == null)
-			return new Album[0];
+	public String getStyleString() {
+		if (style != null)
+			return style;
+	
+		if (splitAlbums.size() == 0)
+			return null;
 		
-		QueryIterator<SplitAlbum> iterator = SplitAlbum.getFinder().
-			where().eq("split_id", id).
-			orderBy("num asc").findIterate();
+		StringBuilder bands = new StringBuilder();
 		
-		List<Album> albums = new ArrayList<Album>();
+		for (int i = 0; i < splitAlbums.size(); i++)
+		{
+			if (i != 0)
+				bands.append(" / ");
+			
+			bands.append(splitAlbums.get(i).getAlbum().getStyle());
+		}
 		
-		while (iterator.hasNext())
-			albums.add(iterator.next().getAlbum());
+		return bands.toString();
+	}	
+	
+	public String getLabelString() {
+		if (splitLabels.size() == 0)
+			return null;
 		
-		return albums.<Album>toArray(new Album[albums.size()]);
-	}
+		StringBuilder bands = new StringBuilder();
+		
+		for (int i = 0; i < splitLabels.size(); i++)
+		{
+			if (i != 0)
+				bands.append(" / ");
+			
+			bands.append(splitLabels.get(i).getLabel().getName());
+		}
+		
+		return bands.toString();
+	}	
 }

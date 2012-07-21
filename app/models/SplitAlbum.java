@@ -64,11 +64,4 @@ public class SplitAlbum extends Model {
 	public Long getId() {
 		return id;
 	}
-	
-	private final static Finder<Long, SplitAlbum> finder = 
-			new Finder<Long, SplitAlbum>(Long.class, SplitAlbum.class);
-	
-	public static Finder<Long, SplitAlbum> getFinder() {
-		return finder;
-	}
 }

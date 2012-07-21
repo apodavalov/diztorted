@@ -122,4 +122,9 @@ public class Article extends Model implements Noveltiable {
 	public void setFirstComment(Comment firstComment) {
 		this.firstComment = firstComment;
 	}
+
+	@Override
+	public String getEntityType() {
+		return "article";
+	}
 }

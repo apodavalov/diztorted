@@ -11,4 +11,10 @@ public interface Noveltiable {
 	 * @return object name
 	 */
 	String getName();
+	
+	/**
+	 * Gets string contains the entity type 
+	 * @return entity type
+	 */
+	String getEntityType();
 }

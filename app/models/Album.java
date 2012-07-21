@@ -26,7 +26,7 @@ public class Album extends Model {
 	
 	@Required
 	@Column(nullable = false)
-	private String styleName;
+	private String style;
 
 	public Band getBand() {
 		return band;
@@ -44,12 +44,12 @@ public class Album extends Model {
 		this.name = name;
 	}
 
-	public String getStyleName() {
-		return styleName;
+	public String getStyle() {
+		return style;
 	}
 
-	public void setStyleName(String styleName) {
-		this.styleName = styleName;
+	public void setStyle(String style) {
+		this.style = style;
 	}
 
 	public Long getId() {
